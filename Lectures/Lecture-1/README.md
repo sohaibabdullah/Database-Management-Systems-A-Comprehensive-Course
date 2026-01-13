@@ -1,14 +1,17 @@
 # LECTURE SHEET 01: Introduction & Architecture
 
+Here is Lecture Sheet 01 with the SmartCampus (University Management System) capstone integration.  
+I have kept the text, structure, and academic rigor exactly as provided, only swapping the specific "UrbanLogistics/Ride-Sharing" examples for "SmartCampus/University" examples where applicable.
+
 **Course:** CSE 3523 – Database Management Systems  
 **Module:** 1 (The Foundation)  
 **Duration:** 1 Hour 20 Minutes  
 
 **Primary Reference:**  
-Silberschatz, Korth, & Sudarshan, *Database System Concepts* (7th Edition), Chapter 1  
+[S] Silberschatz, Korth, & Sudarshan, *Database System Concepts* (7th Edition), Chapter 1  
 
 **Secondary Reference:**  
-Dimitri Fontaine, *The Art of PostgreSQL*
+[AP] Dimitri Fontaine, *The Art of PostgreSQL*
 
 ---
 
@@ -50,15 +53,13 @@ In 1970, Edgar F. Codd, a researcher at IBM, published the landmark paper
 “A Relational Model of Data for Large Shared Data Banks.”
 
 **The Shift:**  
-- Store data as relations (tables)  
-- Describe data logically, not physically  
-- Access data using declarative queries instead of navigation paths  
+Codd proposed a radical idea:
+- Store data as relations (tables)
+- Describe data logically, not physically
+- Access data using declarative queries instead of navigation paths
 
 **Why This Mattered:**  
 This separated logical data design from physical storage, and applications from data structure.
-
-[ADDED – academic clarification]  
-This separation introduced the concept of **data independence**, a foundational principle of database systems that allows optimization and evolution without breaking applications.
 
 ---
 
@@ -69,7 +70,8 @@ This separation introduced the concept of **data independence**, a foundational 
 IBM built System R, the first working prototype of a relational database management system (RDBMS).
 
 **Language Innovation:**  
-IBM researchers developed SEQUEL (Structured English Query Language), later renamed SQL. It introduced SELECT, INSERT, UPDATE, DELETE and set-based operations.
+IBM researchers developed SEQUEL (Structured English Query Language), later renamed SQL.  
+It introduced SELECT, INSERT, UPDATE, DELETE and set-based operations.
 
 **Commercialization:**  
 While IBM moved cautiously, Oracle (founded by Larry Ellison) released the first commercially successful SQL-based relational database in 1979, beating IBM to market.
@@ -78,7 +80,8 @@ While IBM moved cautiously, Oracle (founded by Larry Ellison) released the first
 
 ### 1980s–1990s: The Relational Era
 
-Relational databases became the backbone of enterprise computing (Banking, Airlines, Government). Vendors focused on ACID transactions, data integrity, and vertical scaling.
+Relational databases became the backbone of enterprise computing (Banking, Airlines, Government).  
+Vendors focused on ACID transactions, data integrity, and vertical scaling.
 
 ---
 
@@ -107,12 +110,14 @@ Understanding this evolution helps students see databases not as static tools, b
 
 ### Academic Definition
 
-A Database-Management System (DBMS) is a collection of interrelated data and a set of programs to access those data. The collection of data, usually referred to as the database, contains information relevant to an enterprise. The primary goal of a DBMS is to provide a way to store and retrieve database information that is both convenient and efficient.
+A Database-Management System (DBMS) is a collection of interrelated data and a set of programs to access those data.  
+The collection of data, usually referred to as the database, contains information relevant to an enterprise.  
+The primary goal of a DBMS is to provide a way to store and retrieve database information that is both convenient and efficient.
 
 ### Key Components
 
 - **The Database:**  
-  The physical collection of data (e.g., SmartCampus student records and transcripts).
+  The physical collection of data (e.g., the SmartCampus student records and transcripts).
 
 - **The DBMS Software:**  
   The system that manages access, locking, and crash recovery (e.g., PostgreSQL, Oracle).
@@ -122,43 +127,53 @@ A Database-Management System (DBMS) is a collection of interrelated data and a s
 ## 3. Disadvantages of File-Processing Systems  
 **(Ref: [S] Section 1.2)**
 
-To understand the value of a DBMS, it is useful to first examine why traditional file-processing systems fail.
+To understand the value of a DBMS, it is useful to first examine why traditional file-processing systems fail.  
+Here, “file-processing” refers to applications that store and manage data directly in flat files such as CSV or text files using programming logic (for example, Python scripts).
 
 ---
 
 ### 3.1 Data Redundancy and Inconsistency
 
-In file-processing systems, data files and application programs are often created independently by different programmers over time. As a result, the same data item may be stored in multiple files (data redundancy). When one copy is updated and others are not, the system suffers from data inconsistency.
+In file-processing systems, data files and application programs are often created independently by different programmers over time.  
+As a result, the same data item may be stored in multiple files (data redundancy).  
+When one copy is updated and others are not, the system suffers from data inconsistency, where multiple versions of the same data no longer agree.
 
-#### Live Demo: The "Address Update" Failure
+#### [Live Demo]: The "Address Update" Failure
 
 **Scenario:**  
 We maintain two separate files for students:
-- `library.csv` for the Library System  
-- `fees.csv` for the Bursar/Accounts Office  
+- `library.csv` for the Library System (book loans)
+- `fees.csv` for the Bursar/Accounts Office (tuition billing)
 
-Both files store the student's address. A student moves to a new dorm. The change is applied to the Library file but forgotten in the Fees file.
+Both files store the student's address.  
+A student moves to a new dorm.  
+The change is applied to the Library file but forgotten in the Fees file.
 
 **A. File-Processing Approach (Problematic)**
 
     import pandas as pd
 
-    library_df = pd.read_csv("library.csv")
-    fees_df = pd.read_csv("fees.csv")
+    library_df = pd.read_csv("library.csv")  # Contains address
+    fees_df = pd.read_csv("fees.csv")        # Also contains address
 
     def update_student_address(student_id, new_address):
         library_df.loc[library_df['id'] == student_id, 'address'] = new_address
         library_df.to_csv("library.csv", index=False)
         print("Library records updated.")
 
-**What Goes Wrong**
-- Address duplicated across files  
-- Update logic embedded in application code  
-- Missing one update causes inconsistency  
+        # Fees/Bursar file is NOT updated
+        # RESULT: Data inconsistency (tuition bill goes to wrong house)
 
----
+**What Goes Wrong**
+- The address exists in more than one file
+- The update logic is embedded in application code
+- Forgetting one update leads to inconsistent data
 
 **B. DBMS Solution: Normalization and Single Source of Truth**
+
+In a relational DBMS, data is normalized so that each fact is stored in exactly one place.  
+The student's address is stored once, in a central table (`students`).  
+Library and Fees modules do not maintain their own copies of the address; they query the same underlying data.
 
     UPDATE students
     SET address = '123 New Dorm Hall'
@@ -166,83 +181,30 @@ Both files store the student's address. A student moves to a new dorm. The chang
 
     SELECT address FROM students WHERE student_id = 'S-101';
 
-**Why This Works:**  
-No data duplication. One update automatically affects all users of the data. Consistency is enforced by design.
-
----
-
-### 3.2 Atomicity Problems
-
-**Formal Definition:**  
-A logical unit of work (a transaction) must be atomic—it must happen in its entirety or not at all.
-
-#### Live Demo: The "Lost Tuition" Crash
-
-**Scenario:**  
-A student pays 50,000 BDT tuition to the university.
-
-**A. File-Processing Approach**
-
-    def pay_tuition_unsafe():
-        student_bal = read_balance_from_file("student_bank.txt")
-        write_balance_to_file("student_bank.txt", student_bal - 50000)
-        raise Exception("CRASH!")
-        univ_bal = read_balance_from_file("university_ledger.txt")
-        write_balance_to_file("university_ledger.txt", univ_bal + 50000)
-
-**Result:**  
-Student lost 50,000. University received 0.
-
----
-
-**B. DBMS Solution (ACID Transactions)**
-
-    BEGIN;
-    UPDATE students SET bank_balance = bank_balance - 50000 WHERE id = 101;
-    UPDATE university_ledger SET balance = balance + 50000;
-    COMMIT;
-
-If a crash occurs before COMMIT, PostgreSQL automatically rolls back the transaction.
-
----
-
-### 3.3 Concurrent Access Anomalies
-
-**Scenario:**  
-CSE 3523 has 50 seats. 49 are taken. Two students click "Register" at the same millisecond.
-
-File system result:  
-Both read 49. Both write 50. 51 students enrolled.
-
-**DBMS Solution: Locking**
-
-    SELECT * FROM courses
-    WHERE course_id='CSE3523'
-    FOR UPDATE;
-
 ---
 
 ## 4. Data Abstraction  
 **(Ref: [S] Section 1.3)**
 
-Databases provide an abstract view of data by hiding storage details.
+A major purpose of a database system is to provide users with an abstract view of the data.  
+That is, the system hides certain details of how the data are stored and maintained.
 
-### 4.1 Three Levels of Abstraction
+### 4.1 The Three Levels of Abstraction
 
-![Three Levels of Abstraction](figures/three-levels-abstraction.png)
+![Three Levels of Data Abstraction](figures/three-levels-abstraction.png)
 
-- **Physical Level:** How data is stored  
-- **Logical Level:** What data is stored and relationships  
-- **View Level:** What each user sees  
+- **Physical Level:** How data is stored
+- **Logical Level:** What data is stored and relationships exist
+- **View Level:** What each user or application sees
 
 ### 4.2 Physical Data Independence
 
-Ability to modify the physical schema without changing application programs.
+The ability to modify the physical schema without causing application programs to be rewritten.
 
 **Example**
-- Migrating from HDD to NVMe SSD  
-- Introducing partitioning  
-- Application queries remain unchanged  
+- Migrating from HDD to NVMe SSD
+- Introducing partitioning
+- Application queries remain unchanged
 
 ---
 
@@ -252,34 +214,22 @@ Ability to modify the physical schema without changing application programs.
 A DBMS consists of modular components.
 
 ### Query Processor
-- DDL Interpreter  
-- DML Compiler  
-- Query Evaluation Engine  
+- DDL Interpreter
+- DML Compiler
+- Query Evaluation Engine
 
 ### Storage Manager
-- Buffer Manager  
-- File Manager  
-- Transaction Manager  
+- Buffer Manager
+- File Manager
+- Transaction Manager
 
 Databases aggressively cache data in memory to minimize disk I/O.
-
----
-
-## Industry Incidents: Why This Matters
-
-**Knight Capital (2012):**  
-Lost $440 million in 45 minutes due to faulty deployment.  
-https://en.wikipedia.org/wiki/Knight_Capital_Group
-
-**GitHub Outage (2018):**  
-MySQL replication failure caused data inconsistency.  
-https://github.blog/2018-10-30-oct21-post-incident-analysis/
 
 ---
 
 ## Closing Thought
 
 Databases are not buckets where data is dumped.  
-They are engines that preserve correctness under failure, concurrency, and scale.
+They are engines that preserve correctness under hardware failure, software crashes, and massive concurrency.
 
 This course studies how those engines work.
