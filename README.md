@@ -214,6 +214,7 @@ Supplementary materials include PostgreSQL official documentation and selected l
 **Week 6**
 
 - L11: Constraints, Triggers, and Stored Procedures  
+- L12: Constraints, Triggers, and Stored Procedures  
 
 
 
@@ -227,25 +228,25 @@ Supplementary materials include PostgreSQL official documentation and selected l
 
 **Week 7**
 
-- L12: Storage Organization, Pages, Heap Files, Row vs Column Stores  
+- L13: Storage Organization, Pages, Heap Files, Row vs Column Stores  
 
-- L13: Indexing Fundamentals: B+ Trees, Clustered vs Non-Clustered Indexes  
+- L14: Indexing Fundamentals: B+ Trees, Clustered vs Non-Clustered Indexes  
 
 
 
 **Week 8**
 
-- L14: Index Variants, Composite Indexes, Indexing JSON Data  
+- L15: Index Variants, Composite Indexes, Indexing JSON Data  
 
-- L15: Query Execution Algorithms and Cost-Based Optimization  
+- L16: Query Execution Algorithms and Cost-Based Optimization  
 
 
 
 **Week 9**
 
-- L16: Transactions, ACID Properties, Write-Ahead Logging  
+- L17: Transactions, ACID Properties, Write-Ahead Logging  
 
-- L17: Concurrency Control, Locking Protocols, Deadlocks  
+- L18: Concurrency Control, Locking Protocols, Deadlocks  
 
 
 
@@ -259,25 +260,25 @@ Supplementary materials include PostgreSQL official documentation and selected l
 
 **Week 10**
 
-- L18: Isolation Levels, Anomalies, MVCC  
+- L19: Isolation Levels, Anomalies, MVCC  
 
-- L19: Database Security. Roles, Privileges, Row-Level Security  
+- L20: Database Security. Roles, Privileges, Row-Level Security  
 
 
 
 **Week 11**
 
-- L20: Replication, Partitioning, and Consistency Trade-offs  
+- L21: Replication, Partitioning, and Consistency Trade-offs  
 
-- L21: CAP Theorem in Context and Distributed Databases  
+- L22: CAP Theorem in Context and Distributed Databases  
 
 
 
 **Week 12**
 
-- L22: NoSQL Systems (Document, Key-Value, Graph)  
+- L23: NoSQL Systems (Document, Key-Value, Graph)  
 
-- L23–24: NewSQL, Time-Series Databases, Review and Synthesis  
+- L24: NewSQL, Time-Series Databases, Review and Synthesis  
 
 
 
