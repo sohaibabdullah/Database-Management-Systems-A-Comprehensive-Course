@@ -138,18 +138,11 @@ Supplementary materials include PostgreSQL official documentation and selected l
 
 ## 5. Course Overview
 
-
-
 | Module | Weeks | Theory Focus (CSE 3523) | Lab Focus (CSE 3523S) |
-
-|------|------|--------------------------|----------------------|
-
+|--------|-------|--------------------------|----------------------|
 | Foundations | 1–3 | Architecture, Relational Model, SQL (Basic → Advanced) | Docker setup, GitHub Classroom, SQL unit testing |
-
 | Design & Integrity | 4–6 | ER Modeling, Normalization, Constraints | Capstone schema design, mock data, database programmability |
-
 | Internals & Performance | 7–9 | Storage, Indexing, Query Processing, Transactions | Application integration, migrations, performance tuning |
-
 | Distributed & Modern Systems | 10–12 | Concurrency, Recovery, Replication, Scaling, NoSQL | Security, backup & recovery, capstone defense |
 
 
