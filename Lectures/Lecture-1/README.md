@@ -175,10 +175,18 @@ In a relational DBMS, data is normalized so that each fact is stored in exactly 
 The student's address is stored once, in a central table (`students`).  
 Library and Fees modules do not maintain their own copies of the address; they query the same underlying data.
 
+    -- DBMS APPROACH (CORRECT)
+    
+    -- Update the single source of truth
     UPDATE students
     SET address = '123 New Dorm Hall'
     WHERE student_id = 'S-101';
-
+    
+    -- Both Library and Fees now read the same data:
+    -- Used by Library
+    SELECT address FROM students WHERE student_id = 'S-101';
+    
+    -- Used by Fees/Bursar
     SELECT address FROM students WHERE student_id = 'S-101';
 
 ---
