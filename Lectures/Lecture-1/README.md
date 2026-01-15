@@ -188,7 +188,80 @@ Library and Fees modules do not maintain their own copies of the address; they q
     
     -- Used by Fees/Bursar
     SELECT address FROM students WHERE student_id = 'S-101';
+    
+### 3.1 Data Redundancy and Inconsistency
+**Formal Definition:**
+A logical unit of work (a Transaction) must be atomic—it must happen in its entirety or not at all. Computer systems are subject to failure (power loss, crash). If a failure occurs during a complex update, the data must be restored to the consistent state that existed prior to the failure.
 
+**[Live Demo]: The "Lost Tuition" Crash**
+
+Scenario: A Student (ID 101) pays 50,000 BDT tuition to the University.
+
+**A. The Flawed Python/CSV Approach:**
+
+    # FILE SYSTEM CRASH SIMULATION
+    def pay_tuition_unsafe():
+        # 1. Read Student Bank Balance
+        student_bal = read_balance_from_file("student_bank.txt") # 100,000
+        
+        # 2. Deduct Money from Student
+        write_balance_to_file("student_bank.txt", student_bal - 50000) # Writes 50,000
+        
+        print("Money deducted. Writing to University Ledger...")
+        
+        # --- SIMULATED POWER FAILURE ---
+        raise Exception("CRASH! Server Power Lost.") 
+        
+        # 3. Credit University (This line never runs)
+        univ_bal = read_balance_from_file("university_ledger.txt")
+        write_balance_to_file("university_ledger.txt", univ_bal + 50000)
+
+    # RESULT: Student has lost 50,000. The university received 0. Money vanished.
+
+**B. The DBMS Solution (ACID [(Atomicity, Consistency, Isolation, Durability)] Transactions):**
+ACID transactions are database protocols that ensure reliability through four properties: Atomicity (all-or-nothing), Consistency (valid state transitions), Isolation (independent execution), and Durability (permanent changes). ACID transactions guarantee reliable, fault-tolerant data processing, with Write-Ahead Logging (WAL) being a core mechanism, especially for Durability and Consistency.
+
+PostgreSQL uses Write-Ahead Logging (WAL). If a crash happens before COMMIT, the database automatically "Rolls Back" the changes upon restart.
+
+    # POSTGRESQL APPROACH (SAFE)
+    import psycopg2
+    
+    conn = psycopg2.connect("dbname=smartcampus")
+    cur = conn.cursor()
+    
+    try:
+        # Start Transaction
+        cur.execute("BEGIN;") 
+        
+        # Step 1: Deduct from Student
+        cur.execute("UPDATE students SET bank_balance = bank_balance - 50000 WHERE id = 101;")
+        
+        # --- IF CRASH HAPPENS HERE, POSTGRES AUTO-ROLLBACKS ---
+        # The 'BEGIN' block is not saved to disk until 'COMMIT' is received.
+        
+        # Step 2: Credit University
+        cur.execute("UPDATE university_ledger SET balance = balance + 50000;")
+        
+        # Save Changes
+        cur.execute("COMMIT;") 
+        print("Transaction Successful.")
+        
+    except Exception as e:
+        cur.execute("ROLLBACK;") # Explicit undo if code errors
+        print("Error detected. No money changed hands.")
+###3.3 Concurrent Access Anomalies###
+Formal Definition:
+For performance, systems allow multiple users to update data simultaneously. Without supervision, this leads to inconsistency.
+
+**[Scenario]: The Race Condition (Enrollment Day)**
+-Case: Course CSE 3523 has 50 seats. Currently, 49 are taken. Two students click "Register" at the exact same millisecond.
+-File System: Both Python scripts read the file: "Seats Taken = 49". Both scripts decide "Space Available!" Both overwrite the file with "Seats Taken = 50".
+-Result: 51 students are enrolled in a 50-seat room. The file is corrupted.
+-DBMS Solution: Locking.
+
+    SELECT * FROM courses WHERE course_id='CSE3523' FOR UPDATE;
+    
+    This SQL command tells the database: "Lock this row. Nobody else can touch it until I am done." The       second student's query will wait (block) until the first one finishes.
 ---
 
 ## 4. Data Abstraction  
@@ -201,18 +274,32 @@ That is, the system hides certain details of how the data are stored and maintai
 
 ![Three Levels of Data Abstraction](figures/three-levels-abstraction.png)
 
-- **Physical Level:** How data is stored
-- **Logical Level:** What data is stored and relationships exist
-- **View Level:** What each user or application sees
+1. **Physical Level (The "How"):**
+    *   **Definition:** Describes complex low-level data structures.
+    *   **Example:** "The Student record is stored in Block #4096 on the SSD using a Heap File structure. The index is a B-Tree located in Block #5000."
+    *   **User:** Database Administrator (DBA).
+
+2.  **Logical Level (The "What"):**
+    *   **Definition:** Describes what data are stored in the database and what relationships exist among those data.
+    *   **Example:** `type Student = record (name: string, dept: string, credits: integer)`.
+    *   **User:** YOU (Backend Application Developer).
+
+3.  **View Level (The "Perspective"):**
+    *   **Definition:** Describes only part of the entire database.
+    *   **Example:** The "Student Portal" view shows grades but hides "Faculty Salaries".
+    *   **User:** End-user applications.
 
 ### 4.2 Physical Data Independence
 
 The ability to modify the physical schema without causing application programs to be rewritten.
 
 **Example**
-- Migrating from HDD to NVMe SSD
-- Introducing partitioning
-- Application queries remain unchanged
+**Industry Scenario:**
+-Day 1: Your SmartCampus system uses a cheap standard Hard Drive (HDD).
+--Day 100: You have 50,000 students. The HDD is too slow during enrollment.
+Action: You migrate the data to a high-performance NVMe SSD array and introduce "Partitioning" (splitting data across disks).
+-Result: The Logical Schema (Table definitions) remains unchanged. The Python code (SELECT * FROM students) remains unchanged. The DBMS handles the physical mapping.
+
 
 ---
 
@@ -222,14 +309,14 @@ The ability to modify the physical schema without causing application programs t
 A DBMS consists of modular components.
 
 ### Query Processor
-- DDL Interpreter
-- DML Compiler
-- Query Evaluation Engine
+-DDL Interpreter: Interprets schema definitions (CREATE TABLE).
+-DML Compiler: Translates query language statements (SELECT) into an evaluation plan.
+-Query Evaluation Engine: Executes the low-level instructions generated by the compiler.
 
 ### Storage Manager
-- Buffer Manager
+- Buffer Manager (Critical): Manages the partitioning of main memory (RAM) to cache data blocks. Databases try to avoid Disk I/O at all costs.
+-Transaction Manager: Ensures the ACID properties (Atomicity, Consistency, Isolation, Durability).
 - File Manager
-- Transaction Manager
 
 Databases aggressively cache data in memory to minimize disk I/O.
 
