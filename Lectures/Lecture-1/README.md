@@ -262,7 +262,8 @@ For performance, systems allow multiple users to update data simultaneously. Wit
 
     SELECT * FROM courses WHERE course_id='CSE3523' FOR UPDATE;
     
-    This SQL command tells the database: "Lock this row. Nobody else can touch it until I am done." The       second student's query will wait (block) until the first one finishes.
+    This SQL command tells the database: "Lock this row. Nobody else can touch it until I am done." 
+    The second student's query will wait (block) until the first one finishes.
 ---
 
 ## 4. Data Abstraction  
