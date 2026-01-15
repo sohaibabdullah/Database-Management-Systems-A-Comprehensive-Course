@@ -249,7 +249,7 @@ PostgreSQL uses Write-Ahead Logging (WAL). If a crash happens before COMMIT, the
     except Exception as e:
         cur.execute("ROLLBACK;") # Explicit undo if code errors
         print("Error detected. No money changed hands.")
-###3.3 Concurrent Access Anomalies###
+###3.3 Concurrent Access Anomalies
 Formal Definition:
 For performance, systems allow multiple users to update data simultaneously. Without supervision, this leads to inconsistency.
 
