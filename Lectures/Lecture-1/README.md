@@ -189,7 +189,7 @@ Library and Fees modules do not maintain their own copies of the address; they q
     -- Used by Fees/Bursar
     SELECT address FROM students WHERE student_id = 'S-101';
     
-### 3.1 Data Redundancy and Inconsistency
+### 3.2 Atomicity Problems
 **Formal Definition:**
 A logical unit of work (a Transaction) must be atomic—it must happen in its entirety or not at all. Computer systems are subject to failure (power loss, crash). If a failure occurs during a complex update, the data must be restored to the consistent state that existed prior to the failure.
 
