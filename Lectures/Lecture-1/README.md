@@ -284,7 +284,9 @@ the complexity from users through several levels of **data abstraction**, to sim
 ![Three Levels of Data Abstraction](figures/three-levels-abstraction.png)
 
 1. **Physical Level (The "How"):**
-    *   **Definition:** Describes complex low-level data structures.
+    *   The lowest level of abstraction that describes
+            * How the data are actually stored
+            * Complex low-level data structures
     *   **Example:** "The Student record is stored in Block #4096 on the SSD using a Heap File structure. The index is a B-Tree located in Block #5000."
     *   **User:** Database Administrator (DBA).
 
