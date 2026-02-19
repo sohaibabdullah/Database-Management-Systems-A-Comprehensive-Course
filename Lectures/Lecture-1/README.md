@@ -179,18 +179,25 @@ Library and Fees modules do not maintain their own copies of the address; they q
     
     -- Update the single source of truth
     UPDATE students
-    SET address = '123 New Dorm Hall'
+    SET address = '123 New Elephant Road'
     WHERE student_id = 'S-101';
     
     -- Both Library and Fees now read the same data:
     -- Used by Library
     SELECT address FROM students WHERE student_id = 'S-101';
     
-    -- Used by Fees/Bursar
+    -- Used by Fees
     SELECT address FROM students WHERE student_id = 'S-101';
+
+### 3.2 Difficulty in accessing data
+Suppose that one of the university clerks needs to find out the names of all students who live within a particular postal-code area.
+The clerk asks the data-processing department to generate such a list. Because the designers of the original system did not anticipate this request, there is no application program on hand to meet it. There is, however, an application program
+to generate the list of all students. 
+
+The university clerk now has two choices: either obtain the list of all students and extract the needed information manually or ask a programmer to write the necessary application program. **Both alternatives are obviously unsatisfactory.** 
+
     
-### 3.2 Atomicity Problems
-**Formal Definition:**
+### 3.3 Atomicity Problems
 A logical unit of work (a Transaction) must be atomic—it must happen in its entirety or not at all. Computer systems are subject to failure (power loss, crash). If a failure occurs during a complex update, the data must be restored to the consistent state that existed prior to the failure.
 
 **[Live Demo]: The "Lost Tuition" Crash**
@@ -250,7 +257,7 @@ PostgreSQL uses Write-Ahead Logging (WAL). If a crash happens before COMMIT, the
         cur.execute("ROLLBACK;") # Explicit undo if code errors
         print("Error detected. No money changed hands.")
 
-### 3.3 Concurrent Access Anomalies
+### 3.4 Concurrent Access Anomalies
 **Formal Definition:**
 For performance, systems allow multiple users to update data simultaneously. Without supervision, this leads to inconsistency.
 
@@ -267,10 +274,10 @@ For performance, systems allow multiple users to update data simultaneously. Wit
 ---
 
 ## 4. Data Abstraction  
-**(Ref: [S] Section 1.3)**
+**(Ref: [S] Section 1.3.3)**
 
-A major purpose of a database system is to provide users with an abstract view of the data.  
-That is, the system hides certain details of how the data are stored and maintained.
+For the system to be usable, it must retrieve data efficiently. The need for efficiency has led database system developers to use complex data structures to represent data in the database. Since many database-system users are not computer trained, developers hide
+the complexity from users through several levels of **data abstraction**, to simplify users’ interactions with the system:
 
 ### 4.1 The Three Levels of Abstraction
 

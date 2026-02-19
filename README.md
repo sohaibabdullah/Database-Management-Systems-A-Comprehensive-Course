@@ -112,7 +112,7 @@ This course adopts a **systems-first, infrastructure-as-code approach**.
 
 **[S] Academic Core**  
 
-- Silberschatz, Korth, Sudarshan – *Database System Concepts*, 7th Edition  [Book page](https://www.db-book.com/) 
+- Silberschatz, Korth, Sudarshan – *Database System Concepts*, 7th Edition - [Book page](https://www.db-book.com/) 
 
 
 
