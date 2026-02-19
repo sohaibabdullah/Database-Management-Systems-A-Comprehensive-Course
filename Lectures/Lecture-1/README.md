@@ -328,7 +328,7 @@ The query processor is important because it helps the database system to simplif
 
 
 ### Transaction Manager: 
-The transaction manager is important because it allows application developers to treat a sequence of database accesses as if they were a single unit that either happens in its entirety or not at all. It ensures ensures the ACID properties (Atomicity, Consistency, Isolation, Durability).
+The transaction manager is important because it allows application developers to treat a sequence of database accesses as if they were a single unit that either happens in its entirety or not at all. It ensures the ACID properties (Atomicity, Consistency, Isolation, Durability).
 
 ## Closing Thought
 
