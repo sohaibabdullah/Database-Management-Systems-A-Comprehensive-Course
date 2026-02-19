@@ -284,54 +284,51 @@ the complexity from users through several levels of **data abstraction**, to sim
 ![Three Levels of Data Abstraction](figures/three-levels-abstraction.png)
 
 1. **Physical Level (The "How"):**
-    *   The lowest level of abstraction that describes
+    *   The lowest level of abstraction that describes -
         * How the data are actually stored
         * Complex low-level data structures
     *   **Example:** "The Student record is stored in Block #4096 on the SSD using a Heap File structure. The index is a B-Tree located in Block #5000."
     *   **User:** Database Administrator (DBA).
 
 2.  **Logical Level (The "What"):**
-    *   **Definition:** Describes what data are stored in the database and what relationships exist among those data.
-    *   **Example:** `type Student = record (name: string, dept: string, credits: integer)`.
-    *   **User:** YOU (Backend Application Developer).
+    *   The next-higher level of abstraction Describes what data are stored in the database and what relationships exist among those data. The structures at the logical level may involve complex physical-level structures, the user of the logical level does not need to be aware of this complexity. This is referred to as **physical data independence**.
+    *   **Example (physical data independence):** 
+        -Day 1: Your SmartCampus system uses a cheap standard Hard Drive (HDD).
+        --Day 100: You have 50,000 students. The HDD is too slow during enrollment.
+        Action: You migrate the data to a high-performance NVMe SSD array and introduce "Partitioning" (splitting data across disks).
+        -Result: The Logical Schema (Table definitions) remains unchanged. The Python code (SELECT * FROM students) remains unchanged. The DBMS handles the physical mapping.
 
 3.  **View Level (The "Perspective"):**
-    *   **Definition:** Describes only part of the entire database.
+    *   The highest level of abstraction describes only part of the entire database.  Many users of the database system do not need all this information; instead, they need to access only a part of the database. The view level of abstraction exists to simplify their interaction with the system. The system may provide many views for the same database.
     *   **Example:** The "Student Portal" view shows grades but hides "Faculty Salaries".
     *   **User:** End-user applications.
 
-### 4.2 Physical Data Independence
-
-The ability to modify the physical schema without causing application programs to be rewritten.
-
-**Example**
-**Industry Scenario:**
--Day 1: Your SmartCampus system uses a cheap standard Hard Drive (HDD).
---Day 100: You have 50,000 students. The HDD is too slow during enrollment.
-Action: You migrate the data to a high-performance NVMe SSD array and introduce "Partitioning" (splitting data across disks).
--Result: The Logical Schema (Table definitions) remains unchanged. The Python code (SELECT * FROM students) remains unchanged. The DBMS handles the physical mapping.
 
 
 ---
 
 ## 5. Database Architecture  
-**(Ref: [S] Section 1.4)**
+**(Ref: [S] Section 1.6)**
 
-A DBMS consists of modular components.
+A DBMS  is partitioned into modules that deal with each of the responsibilities of the overall system. The functional components of a database system can be broadly divided into the storage manager, the query processor components, and the transaction management component.
+
+### Storage Manager
+- The storage manager is the component of a database system that provides the interface
+between the low-level data stored in the database and the application programs and
+queries submitted to the system.
+- The storage manager is important because databases typically require a large amount of storage space. Corporate databases commonly range in size from hundreds of gigabytes to terabytes of data. The largest enterprises have databases that reach into the multi-petabyte range. Since the main memory of computers cannot store this much information, and since the contents of main memory are lost in a system crash, the information is stored on disks. Data are moved between disk storage and main memory as needed. Since the movement of data to and from disk is slow relative to the speed of the central processing unit, it is imperative that the database system structure the data so as to minimize the need to move data between disk and main memory. 
+
+- To deal with this issue DBMS uses **Buffer Manager**, which is responsible for fetching data from disk storage into main memory, and deciding what data to cache in main memory. The buffer manager is a critical part of the database system, since it enables the database to handle data sizes that are much larger than the size of main memory. 
 
 ### Query Processor
+The query processor is important because it helps the database system to simplify and facilitate access to data. The query processor allows database users to obtain good performance while being able to work at the view level and not be burdened with understanding the physical-level details of the implementation of the system. The query processor components include:
 -DDL Interpreter: Interprets schema definitions (CREATE TABLE).
 -DML Compiler: Translates query language statements (SELECT) into an evaluation plan.
 -Query Evaluation Engine: Executes the low-level instructions generated by the compiler.
 
-### Storage Manager
-- Buffer Manager (Critical): Manages the partitioning of main memory (RAM) to cache data blocks. Databases try to avoid Disk I/O at all costs.
--Transaction Manager: Ensures the ACID properties (Atomicity, Consistency, Isolation, Durability).
-- File Manager
 
-Databases aggressively cache data in memory to minimize disk I/O.
-
----
+### Transaction Manager: 
+The transaction manager is important because it allows application developers to treat a sequence of database accesses as if they were a single unit that either happens in its entirety or not at all. It ensures ensures the ACID properties (Atomicity, Consistency, Isolation, Durability).
 
 ## Closing Thought
 
