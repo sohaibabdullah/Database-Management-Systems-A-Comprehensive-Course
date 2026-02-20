@@ -32,6 +32,7 @@ objects. The entity-relationship model is widely used in database design.
 
 * **Semi-structured Data Model.** The semi-structured data model permits the specifi cation of data where individual data items of the same type may have different sets of attributes. This is in contrast to the data models mentioned earlier, where
 every data item of a particular type must have the same set of attributes. JSON and Extensible Markup Language (XML) are widely used semi-structured data represen tations. 
+Following is the JSON and XML examples respectively:
     <code>
     {
     "student": {
@@ -39,12 +40,7 @@ every data item of a particular type must have the same set of attributes. JSON 
         "name": "Rahim Uddin",
         "email": "rahim@example.com",
         "date_of_birth": "2005-03-15",
-        "department": {
-        "dept_name": "CSE",
-        "building": "Academic Building-2",
-        "budget": 5000000
         }
-    }
     }
     </code>
 ---
@@ -54,11 +50,6 @@ every data item of a particular type must have the same set of attributes. JSON 
         <name>Rahim Uddin</name>
         <email>rahim@example.com</email>
         <date_of_birth>2005-03-15</date_of_birth>
-        <department>
-            <dept_name>CSE</dept_name>
-            <building>Academic Building-2</building>
-            <budget>5000000</budget>
-        </department>
     </student>
 
 
