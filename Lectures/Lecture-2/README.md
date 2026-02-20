@@ -23,8 +23,8 @@ Data models can be classified into four categories:
 Example tables:
  * **Instructor**: shows instructor details such as ID, name, department, and salary.
  * **Department**: shows department details such as department name, building and budget.
- [](./instructor.png)
- [](./department.png)
+ ![](./instructor.png)
+ ![](./department.png)
 
 * **Entity-Relationship Model.**  The entity-relationship (E-R) data model uses a collection of basic objects, called entities,andrelationships among these objects. An entity is a “thing” or “object” in the real world that is distinguishable from other
 objects. The entity-relationship model is widely used in database design.
