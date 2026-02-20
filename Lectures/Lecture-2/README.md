@@ -25,6 +25,7 @@ Data models can be classified into four categories:
 3. Semi-structured Data Model
 4. Object-Based Data Model
 
+
 * **Relational Model:** The relational model for database management was introduced by Edgar F. Codd (E.F. Codd), a British computer scientist working for IBM, in 1970 when he published his groundbreaking paper titled ["A Relational Model of Data for Large Shared Data Banks,"](https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf) in the ACM journal.
 
     The relational model uses a collection of **tables** to represent data and relationships. Each table has multiple **columns**(also called **field** or **attribute**) with unique names. Tables are also known as **relations**. Each row represents one piece of information known as **record**. 
