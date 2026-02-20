@@ -62,7 +62,7 @@ objects. The entity-relationship model is widely used in database design.
 ![](./ERDiagram.png)
 ---
 * **Semi-structured Data Model:** Traditional models assume a closed-world, schema-first universe. Semi-structured data models assume an open-world, schema-later universe. It permits the specification of data where individual data items of the same type may have different sets of attributes. This is in contrast to the data models mentioned earlier, where every data item of a particular type must have the same set of attributes. JSON and Extensible Markup Language (XML) are widely used semi-structured data represen tations. 
-Following is the JSON and XML examples respectively:
+Following are the JSON and XML examples respectively:
     
     JSON:
     ```
@@ -102,6 +102,7 @@ Following is the JSON and XML examples respectively:
 * **Object-Based Data Model:**  Object-oriented programming (e.g., python, Java, C++, or C#) has become the dominant software-development methodology. This led initially to the development of a distinct object-oriented data model, but today the concept of objects is well integrated into relational databases. Standards exist to store objects in relational tables. Database systems allow procedures to be stored in the database system and executed by the database system.
     
     **Example**
+    
     In Python, a Student is naturally modeled as an object:
     ```
     class Student:
@@ -128,6 +129,7 @@ Following is the JSON and XML examples respectively:
     Object-Based Model = Database + procedure
 
     But, A relational database stores only data.
+    
     | name | marks |
     | Rahim| 85 |
 
