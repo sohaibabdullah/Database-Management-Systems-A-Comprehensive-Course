@@ -13,17 +13,18 @@
 
 ---
 
-# View of Data
-
-A database system is a collection of interrelated data and programs that allow users to access and modify these data. A major purpose is to provide users with an abstract view of the data, hiding details of how the data are stored and maintained.
-
-## Data Models
+# Data Models
 
 Underlying the structure of a database is the data model: a collection of conceptual tools for describing data, relationships, semantics, and consistency constraints.
 
 Data models can be classified into four categories:
 
-* **Relational Model.** The relational model uses a collection of tables to represent data and relationships. Each table has multiple columns with unique names. Tables are also known as relations. It is a record-based model where the database is structured in fixed-format records. Each record type defines a fixed number of attributes. The relational model is the most widely used data model.
+* **Relational Model.** The relational model uses a collection of tables to represent data and relationships. Each table has multiple columns (also called field or attribute) with unique names. Tables are also known as relations. Each row represents one piece of information known as record. It is a record-based model where the database is structured in fixed-format records. Each record type defines a fixed number of attributes. The relational model is the most widely used data model.
+Example tables:
+ * **Instructor**: shows instructor details such as ID, name, department, and salary.
+ * **Department**: shows department details such as department name, building and budget.
+ [](./instructor.png)
+ [](./department.png)
 
 * **Entity-Relationship Model.**  The entity-relationship (E-R) data model uses a collection of basic objects, called entities,andrelationships among these objects. An entity is a “thing” or “object” in the real world that is distinguishable from other
 objects. The entity-relationship model is widely used in database design.
@@ -37,14 +38,9 @@ extending the relational model with notions of encapsulation, methods, and objec
 
 A large portion of database applications is based on the relational model.
 
-## 1.3.2 Relational Data Model
+## Relational Data Model
 
-In the relational model, data are represented in tables. Each table has multiple columns with unique names. Each row represents one piece of information.
 
-Example tables:
-
-* **Instructor**: shows instructor details such as ID, department, and salary.
-* **Department**: shows department details such as building and budget.
 
 Small tables are used to illustrate concepts.
 
