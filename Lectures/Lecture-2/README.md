@@ -43,7 +43,7 @@ Following is the JSON and XML examples respectively:
         }
     }
     </code>
----
+    ---
 
     <student>
         <student_id>S101</student_id>
