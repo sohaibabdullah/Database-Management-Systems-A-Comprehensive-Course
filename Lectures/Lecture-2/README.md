@@ -129,8 +129,9 @@ Following are the JSON and XML examples respectively:
     Object-Based Model = Database + procedure
 
     But, A relational database stores only data.
-    
+
     | name | marks |
+    |---|---|
     | Rahim| 85 |
 
     Some DBs (e.g., PostgreSQL) actually support object features:
