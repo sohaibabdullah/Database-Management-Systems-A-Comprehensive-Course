@@ -287,11 +287,14 @@ the complexity from users through several levels of **data abstraction**, to sim
     *   The lowest level of abstraction that describes -
         * How the data are actually stored
         * Complex low-level data structures
+        * At the physical level, records are stored as bytes. The database system hides these details. Indexes support efficient retrieval.
     *   **Example:** "The Student record is stored in Block #4096 on the SSD using a Heap File structure. The index is a B-Tree located in Block #5000."
     *   **User:** Database Administrator (DBA).
 
 2.  **Logical Level (The "What"):**
-    *   The next-higher level of abstraction Describes what data are stored in the database and what relationships exist among those data. The structures at the logical level may involve complex physical-level structures, the user of the logical level does not need to be aware of this complexity. This is referred to as **physical data independence**.
+    * The next-higher level of abstraction Describes what data are stored in the database and what relationships exist among those data. 
+    * At the logical level, records are defined by type definitions and relationships.
+    * The structures at the logical level may involve complex physical-level structures, the user of the logical level does not need to be aware of this complexity. This is referred to as **physical data independence**.
     *   **Example (physical data independence):** 
         -Day 1: Your SmartCampus system uses a cheap standard Hard Drive (HDD).
         --Day 100: You have 50,000 students. The HDD is too slow during enrollment.
