@@ -54,7 +54,7 @@ Data models can be classified into four categories:
     (dept name char (20),
     building char (15),
     budget numeric (12,2));
-```
+    ```
 
 * **Entity-Relationship Model:**  The entity-relationship (E-R) data model uses a collection of basic objects, called entities,and relationships among these objects. An entity is a “thing” or “object” in the real world that is distinguishable from other
 objects. The entity-relationship model is widely used in database design.
