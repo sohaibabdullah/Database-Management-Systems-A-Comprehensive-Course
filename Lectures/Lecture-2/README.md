@@ -21,8 +21,8 @@ Data models can be classified into four categories:
 
 * **Relational Model.** The relational model uses a collection of tables to represent data and relationships. Each table has multiple columns (also called field or attribute) with unique names. Tables are also known as relations. Each row represents one piece of information known as record. It is a record-based model where the database is structured in fixed-format records. Each record type defines a fixed number of attributes. The relational model is the most widely used data model.
 Example tables:
- * **Instructor**: shows instructor details such as ID, name, department, and salary.
- * **Department**: shows department details such as department name, building and budget.
+    * **Instructor**: shows instructor details such as ID, name, department, and salary.
+    * **Department**: shows department details such as department name, building and budget.
  ![](./instructor.png)
  ![](./department.png)
 
