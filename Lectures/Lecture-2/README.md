@@ -27,33 +27,33 @@ Data models can be classified into four categories:
 
 * **Relational Model:** The relational model for database management was introduced by Edgar F. Codd (E.F. Codd), a British computer scientist working for IBM, in 1970 when he published his groundbreaking paper titled ["A Relational Model of Data for Large Shared Data Banks,"](https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf) in the ACM journal.
 
-The relational model uses a collection of **tables** to represent data and relationships. Each table has multiple **columns**(also called **field** or **attribute**) with unique names. Tables are also known as **relations**. Each row represents one piece of information known as **record**. 
+    The relational model uses a collection of **tables** to represent data and relationships. Each table has multiple **columns**(also called **field** or **attribute**) with unique names. Tables are also known as **relations**. Each row represents one piece of information known as **record**. 
 
-It is a record-based model where the database is structured in fixed-format records. Each record type defines a fixed number of attributes. 
+    It is a record-based model where the database is structured in fixed-format records. Each record type defines a fixed number of attributes. 
 
-The relational model is the most widely used data model.
+    The relational model is the most widely used data model.
 
-Example tables/relations:
-    * **Instructor**: shows instructor details such as ID, name, department, and salary.
-    * **Department**: shows department details such as department name, building and budget.
- ![](./instructor.png)
- ![](./department.png)
+    Example tables/relations:
+        * **Instructor**: shows instructor details such as ID, name, department, and salary.
+        * **Department**: shows department details such as department name, building and budget.
+    ![](./instructor.png)
+    ![](./department.png)
 
- A **query** is a statement requesting the retrieval of information. When the relational model was introduced, it included a new way of querying data: **SQL**. SQL stands for **Structured Query Language**; the term defines a declarative programming language. 
+    A **query** is a statement requesting the retrieval of information. When the relational model was introduced, it included a new way of querying data: **SQL**. SQL stands for **Structured Query Language**; the term defines a declarative programming language. 
 
-In a **declarative query language**, like SQL or relational algebra, we just specify the
-pattern of the data we want — **what** conditions the results must meet, and how we want it to be transformed (e.g. sorted, grouped and aggregated), but **not how** to achieve that goal. For example:
-```
-SELECT * FROM student WHERE location = 'Mirpur';
-```
-Databases change over time. The collection of information stored in the database at a particular moment is called an **instance** of the database. The overall design of the database is called the **schema**.
+    In a **declarative query language**, like SQL or relational algebra, we just specify the
+    pattern of the data we want — **what** conditions the results must meet, and how we want it to be transformed (e.g. sorted, grouped and aggregated), but **not how** to achieve that goal. For example:
+    ```
+    SELECT * FROM student WHERE location = 'Mirpur';
+    ```
+    Databases change over time. The collection of information stored in the database at a particular moment is called an **instance** of the database. The overall design of the database is called the **schema**.
 
-A database system provides a **data-definition language (DDL)** to specify the database schema and a **data-manipulation language (DML)** to express database queries and updates. In practice, the data-definition and data-manipulation languages are not two separate languages; instead they simply form parts of a single database language, such as the SQL language. Example of DDL:
-```
-create table department
-(dept name char (20),
-building char (15),
-budget numeric (12,2));
+    A database system provides a **data-definition language (DDL)** to specify the database schema and a **data-manipulation language (DML)** to express database queries and updates. In practice, the data-definition and data-manipulation languages are not two separate languages; instead they simply form parts of a single database language, such as the SQL language. Example of DDL:
+    ```
+    create table department
+    (dept name char (20),
+    building char (15),
+    budget numeric (12,2));
 ```
 
 * **Entity-Relationship Model:**  The entity-relationship (E-R) data model uses a collection of basic objects, called entities,and relationships among these objects. An entity is a “thing” or “object” in the real world that is distinguishable from other
@@ -123,7 +123,7 @@ Following is the JSON and XML examples respectively:
     name, marks → Data
 
     get_grade() → procedures/functions/methods
-    
+
     Object-Based Model = Database + procedure
 
     But, A relational database stores only data.
