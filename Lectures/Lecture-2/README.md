@@ -26,24 +26,45 @@ Example tables:
  ![](./instructor.png)
  ![](./department.png)
 
-* **Entity-Relationship Model.**  The entity-relationship (E-R) data model uses a collection of basic objects, called entities,andrelationships among these objects. An entity is a “thing” or “object” in the real world that is distinguishable from other
+* **Entity-Relationship Model.**  The entity-relationship (E-R) data model uses a collection of basic objects, called entities,and relationships among these objects. An entity is a “thing” or “object” in the real world that is distinguishable from other
 objects. The entity-relationship model is widely used in database design.
+![](./ERDiagram.png)
 
 * **Semi-structured Data Model.** The semi-structured data model permits the specifi cation of data where individual data items of the same type may have different sets of attributes. This is in contrast to the data models mentioned earlier, where
 every data item of a particular type must have the same set of attributes. JSON and Extensible Markup Language (XML) are widely used semi-structured data represen tations. 
+
+{
+  "student": {
+    "student_id": "S101",
+    "name": "Rahim Uddin",
+    "email": "rahim@example.com",
+    "date_of_birth": "2005-03-15",
+    "department": {
+      "dept_name": "CSE",
+      "building": "Academic Building-2",
+      "budget": 5000000
+    }
+  }
+}
+
+<student>
+    <student_id>S101</student_id>
+    <name>Rahim Uddin</name>
+    <email>rahim@example.com</email>
+    <date_of_birth>2005-03-15</date_of_birth>
+    
+    <department>
+        <dept_name>CSE</dept_name>
+        <building>Academic Building-2</building>
+        <budget>5000000</budget>
+    </department>
+</student>
 
 * **Object-Based Data Model.**  Object-oriented programming (especially in Java, C++, or C#) has become the dominant software-development methodology. This led initially to the development of a distinct object-oriented data model, but today the
 concept of objects is well integrated into relational databases. Standards exist to store objects in relational tables. Database systems allow procedures to be stored in the database system and executed by the database system. This can be seen as
 extending the relational model with notions of encapsulation, methods, and object identity. 
 
 A large portion of database applications is based on the relational model.
-
-## Relational Data Model
-
-
-
-Small tables are used to illustrate concepts.
-
 
 ## Instances and Schemas
 
