@@ -167,7 +167,7 @@ Supplementary materials include PostgreSQL official documentation and selected l
 
 - L1: Database Systems Architecture. File Systems vs DBMS. Storage vs Compute  
 
-- L2: Data Models and the Relational Model. Relations, Tuples, Keys, Schema vs Instance  
+- L2: Data Models and the Relational Model: Relations, Tuples, Keys, Schema vs Instance  
 
 
 
