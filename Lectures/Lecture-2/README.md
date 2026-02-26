@@ -61,7 +61,8 @@ Data models can be classified into four categories:
 objects. The entity-relationship model is widely used in database design.
 ![](./ERDiagram.png)
 ---
-* **Semi-structured Data Model:** Traditional models assume a closed-world, schema-first universe. Semi-structured data models assume an open-world, schema-later universe. It permits the specification of data where individual data items of the same type may have different sets of attributes. This is in contrast to the data models mentioned earlier, where every data item of a particular type must have the same set of attributes. JSON and Extensible Markup Language (XML) are widely used semi-structured data represen tations. 
+* **Semi-structured Data Model:** Traditional models assume a closed-world, schema-first universe. Semi-structured data models assume an open-world, schema-later universe. It permits the specification of data where individual data items of the same type may have different sets of attributes. This is in contrast to the data models mentioned earlier, where every data item of a particular type must have the same set of attributes. JSON (JavaScript Object Notation) and Extensible Markup Language (XML) are widely used semi-structured data represen tations. 
+
 Following are the JSON and XML examples respectively:
     
     JSON:
