@@ -1,4 +1,4 @@
-# Lab 01: Exploring file-processing systems, Environment Setup & The SmartCampus Infrastructure
+# Lab 01: Exploring file-processing systems, Environment Setup & Starting with SQL
 
 **Course:** CSE 3523S - Database Management Systems (Lab)  
 **Instructor:** Sohaib Abdullah  
