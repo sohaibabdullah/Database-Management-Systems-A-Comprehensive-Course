@@ -170,7 +170,9 @@ Following are the JSON and XML examples respectively:
     SELECT name, marks, get_grade(marks) AS grade
     FROM Student;
     ```
+    You can go to online SQL playground like [DB Fiddle](https://www.db-fiddle.com/) and try out with the above SQL code.
 
+    Alternatively, you can try with it locally using the following python script:
 
     Python Demo with psycopg2 (Psycopg2 is the most popular PostgreSQL database adapter for Python)
     ```
