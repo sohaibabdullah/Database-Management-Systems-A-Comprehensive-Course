@@ -128,15 +128,15 @@ Following are the JSON and XML examples respectively:
 
     Object-Based Model = Database + procedure
 
-    But, A relational database stores only data.
+    But, traditionally a relational database stores only data not the procedure
 
     | name | marks |
     |---|---|
     | Rahim| 85 |
 
-    Some DBs (e.g., PostgreSQL) actually support object features:
+    Modern DBs (e.g., PostgreSQL) actually support object features:
 
-    1. Create Table for Students
+    1. Create Table for Students and insert few rows
     ```
     CREATE TABLE Student(
     name TEXT,
@@ -172,7 +172,7 @@ Following are the JSON and XML examples respectively:
     ```
 
 
-    Python Demo with psycopg2
+    Python Demo with psycopg2 (Psycopg2 is the most popular PostgreSQL database adapter for Python)
     ```
     import psycopg2
 
